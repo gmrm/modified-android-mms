@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Copyright (C) 2007-2008 Esmertec AG.
+ * Copyright (C) 2007-2008 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory android:title="@string/pref_sms_settings_title">
+    <CheckBoxPreference android:defaultValue="false"
+                      android:key="pref_key_sms_delivery_reports"
+                      android:summary="@string/pref_summary_sms_delivery_reports"
+                      android:title="@string/pref_title_sms_delivery_reports" />
+    <com.android.mms.ui.ManageSimPreference
+       android:key="pref_key_manage_sim_messages"
+       android:summary="@string/pref_summary_manage_sim_messages"
+       android:title="@string/pref_title_manage_sim_messages" />
+  </PreferenceCategory>
+  <PreferenceCategory android:title="@string/pref_mms_settings_title">
+    <CheckBoxPreference android:defaultValue="false"
+                      android:key="pref_key_mms_delivery_reports"
+                      android:summary="@string/pref_summary_mms_delivery_reports"
+                      android:title="@string/pref_title_mms_delivery_reports" />
+    <CheckBoxPreference android:defaultValue="false"
+                      android:key="pref_key_mms_read_reports"
+                      android:summary="@string/pref_summary_mms_read_reports"
+                      android:title="@string/pref_title_mms_read_reports" />
+    <CheckBoxPreference android:defaultValue="true"
+                      android:key="pref_key_mms_auto_retrieval"
+                      android:title="@string/pref_title_mms_auto_retrieval"
+                      android:summary="@string/pref_summary_mms_auto_retrieval" />
+    <CheckBoxPreference android:layout="?android:attr/preferenceLayoutChild"
+                        android:dependency="pref_key_mms_auto_retrieval"
+                        android:defaultValue="false"
+                        android:key="pref_key_mms_retrieval_during_roaming"
+                        android:title="@string/pref_title_mms_retrieval_during_roaming"
+                        android:summary="@string/pref_summary_mms_retrieval_during_roaming" />
+  </PreferenceCategory>
+  <PreferenceCategory android:title="@string/pref_notification_settings_title">
+    <CheckBoxPreference android:key="pref_key_enable_notifications"
+                        android:title="@string/pref_title_notification_enabled"
+                        android:summary="@string/pref_summary_notification_enabled"
+                        android:defaultValue="true" />
+    <PreferenceScreen android:key="pref_key_mms_notification_settings"
+                      android:dependency="pref_key_enable_notifications"
+                      android:title="@string/pref_notification_settings_title">
+        <PreferenceCategory android:title="@string/pref_notification_settings_title">
+          <RingtonePreference android:layout="?android:attr/preferenceLayoutChild"
+                              android:dependency="pref_key_enable_notifications"
+                              android:key="pref_key_ringtone"
+                              android:title="@string/pref_title_notification_ringtone"
+                              android:ringtoneType="notification"
+                              android:defaultValue="content://settings/system/notification_sound" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/pref_title_mms_notification_led_settings">
+          <CheckBoxPreference android:key="pref_key_mms_notification_led"
+                              android:dependency="pref_key_enable_notifications"
+                              android:defaultValue="true"
+                              android:title="@string/pref_title_mms_notification_led"
+                              android:summary="@string/pref_summary_mms_notification_led" />
+          <ListPreference android:key="pref_key_mms_notification_led_color"
+                          android:dependency="pref_key_mms_notification_led"
+                          android:defaultValue="green"
+                          android:title="@string/pref_title_mms_notification_led_color"
+                          android:summary="@string/pref_summary_mms_notification_led_color"
+                          android:entries="@array/pref_mms_notification_led_color_entries"
+                          android:entryValues="@array/pref_mms_notification_led_color_values"
+                          android:dialogTitle="@string/pref_dialogtitle_mms_notification_led_color" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/pref_title_mms_notification_vibrate_settings">
+          <CheckBoxPreference android:layout="?android:attr/preferenceLayoutChild"
+                              android:key="pref_key_vibrate"
+                              android:defaultValue="false"
+                              android:title="@string/pref_title_notification_vibrate"
+                              android:summary="@string/pref_summary_notification_vibrate" />
+          <ListPreference android:key="pref_key_mms_notification_vibrate_pattern"
+                          android:dependency="pref_key_vibrate"
+                          android:defaultValue="0,1200"
+                          android:title="@string/pref_title_mms_notification_vibrate_pattern"
+                          android:summary="@string/pref_summary_mms_notification_vibrate_pattern"
+                          android:entries="@array/pref_mms_notification_vibrate_pattern_entries"
+                          android:entryValues="@array/pref_mms_notification_vibrate_pattern_values"
+                          android:dialogTitle="@string/pref_title_mms_notification_vibrate_pattern" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/pref_extra_settings">
+    <PreferenceScreen android:key="pref_key_mms_signature"
+                      android:title="@string/pref_title_mms_signature"
+                      android:summary="@string/pref_summary_mms_signature" >
+        <PreferenceCategory android:title="@string/pref_title_mms_signature">
+          <EditTextPreference android:key="pref_key_mms_signature"
+                              android:title="@string/pref_title_mms_edit_signature"
+                              android:dialogTitle="@string/pref_title_mms_edit_signature" />
+          <ListPreference android:key="pref_key_mms_signature_auto_append"
+                          android:defaultValue="0"
+                          android:title="@string/pref_title_mms_signature_auto_append"
+                          android:summary="@string/pref_summary_mms_signature_auto_append"
+                          android:entries="@array/pref_mms_signature_auto_append_entries"
+                          android:entryValues="@array/pref_mms_signature_auto_append_values"
+                          android:dialogTitle="@string/pref_dialogtitle_mms_signature_auto_append" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <CheckBoxPreference android:key="pref_key_mms_send_on_enter"
+                        android:title="@string/pref_title_mms_send_on_enter"
+                        android:summary="@string/pref_summary_mms_send_on_enter"
+                        android:defaultValue="true" />
+    <CheckBoxPreference android:key="pref_key_mms_black_background"
+                        android:title="@string/pref_title_mms_black_background"
+                        android:summary="@string/pref_summary_mms_black_background"
+                        android:defaultValue="false" />
+  </PreferenceCategory>
+</PreferenceScreen>
